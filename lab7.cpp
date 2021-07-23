@@ -2,29 +2,31 @@
 using namespace std;
 unordered_map<string, int> table;
 unordered_map<string, int> table1;
-const int MAX_CHAR = 256;
-void init(){
-	for (int i = 0; i <= 255; i++) {
-		string ch = "";
-		ch += char(i);
-		table1[ch] = i;
-	}
-}
 
-vector<int> encoding(string s1, string unique)
+vector<int> encoding(string s1)
 {
 	cout << "Encoding\n";
 	unordered_map<string, int> table;
-	for (int i = 0; i <unique.length() ; i++) {
+	// for (int i = 0; i <s1.length() ; i++) {
+	// 	string ch = "";
+	// 	ch += s1[i];
+	// 	cout<<ch<<;
+	// 	if(table.find(ch)!=table.end()){
+	// 		table[ch] = code;
+	// 		code++;
+	// 	}
+	// }
+
+	for (int i = 0; i <=3; i++) {
 		string ch = "";
-		ch += unique[i];
+		ch += char(i);
 		table[ch] = i;
 	}
 
 	string p = "", c = "";
 	p += s1[0];
-	int code = unique.length();
 	vector<int> output_code;
+	int code =4;
 	cout << "String\tOutput_Code\tAddition\n";
 	for (int i = 0; i < s1.length(); i++) {
 		if (i != s1.length() - 1)
@@ -83,36 +85,37 @@ void decoding(vector<int> op)
 }
 
 
-string printDistinctCharacters(string str) {
-   int n = str.length();
-   int count[MAX_CHAR];
-   int index[MAX_CHAR];
-   string ans="";
-   for (int i = 0; i < MAX_CHAR; i++) {
-      count[i] = 0;
-      index[i] = n;
-   }
-   for (int i = 0; i < n; i++) {
-      char x=str[i];
-      ++count[x];
-      if (count[x] == 1 && x !=' ')
-         index[x] = i;
-      if (count[x] == 2)
-         index[x] = n;
-   }
-   sort(index, index+MAX_CHAR);
-   for (int i=0; i<MAX_CHAR && index[i] != n; i++)
-   	ans+=str[index[i]];
-	return ans;
-}
+// string printDistinctCharacters(string str) {
+//    int n = str.length();
+//    int count[MAX_CHAR];
+//    int index[MAX_CHAR];
+//    string ans="";
+//    for (int i = 0; i < MAX_CHAR; i++) {
+//       count[i] = 0;
+//       index[i] = n;
+//    }
+//    for (int i = 0; i < n; i++) {
+//       char x=str[i];
+//       ++count[x];
+//       if (count[x] == 1 && x !=' ')
+//          index[x] = i;
+//       if (count[x] == 2)
+//          index[x] = n;
+//    }
+//    sort(index, index+MAX_CHAR);
+//    for (int i=0; i<MAX_CHAR && index[i] != n; i++)
+//    	ans+=str[index[i]];
+// 	   cout<<"check "<<ans;
+// 	return ans;
+// }
 
 
 
 int main()
 {
-	string s = "This is test";
-	string unique = printDistinctCharacters(s);
-	vector<int> output_code = encoding(s,unique);
+	string s = "abababa";
+	// string unique = printDistinctCharacters(s);
+	vector<int> output_code = encoding(s);
 	cout << "Output Codes are: ";
 	for (int i = 0; i < output_code.size(); i++) {
 		cout << output_code[i] << " ";
